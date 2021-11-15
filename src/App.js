@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components/macro';
+import toast, { Toaster } from 'react-hot-toast';
 
 import InputControll from './components/InputControll';
 import ResultBox from './components/ResultBox';
@@ -33,11 +34,7 @@ const copyTxt = (txt) => {
     navigator.clipboard.writeText(txt);
   }
 
-  alert(
-    `${txt}
-
-Copied to clipboard!`
-  );
+  toast.success(`Copied: ${txt}`);
 };
 
 export default function App() {
@@ -113,6 +110,7 @@ export default function App() {
 
         <ResultBox clampFunc={clampFunc}>
           <CopyBtn title="Copy to clipboard" onClick={() => copyTxt(clampFunc)} />
+          <Toaster />
         </ResultBox>
       </Container>
     </AppDiv>
