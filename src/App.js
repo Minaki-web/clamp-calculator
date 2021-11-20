@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import styled from 'styled-components/macro';
-import toast, { Toaster } from 'react-hot-toast';
+import React, { useState } from 'react'
+import styled from 'styled-components/macro'
+import toast, { Toaster } from 'react-hot-toast'
 
-import InputControll from './components/InputControll';
-import ResultBox from './components/ResultBox';
-import CopyBtn from './components/CopyBtn';
+import InputControll from './components/InputControll'
+import ResultBox from './components/ResultBox'
+import CopyBtn from './components/CopyBtn'
 
 // #region styles
 const AppDiv = styled.div`
@@ -13,47 +13,46 @@ const AppDiv = styled.div`
   justify-content: center;
   flex-direction: column;
   height: 100vh;
-`;
+`
 
 const Container = styled.div`
-  width: min(90%, 500px);
   margin: 0 auto;
-`;
+`
 
 const copyTxt = (txt) => {
-  const agent = window.navigator.userAgent;
+  const agent = window.navigator.userAgent
   // iosかどうかの判定
   if (agent.indexOf('iPhone') !== -1 || agent.indexOf('iPad') !== -1 || agent.indexOf('iPod') !== -1) {
-    const t = document.createElement('textarea');
-    t.value = txt;
-    document.body.appendChild(t);
-    t.select();
-    document.execCommand('copy');
-    document.body.removeChild(t);
+    const t = document.createElement('textarea')
+    t.value = txt
+    document.body.appendChild(t)
+    t.select()
+    document.execCommand('copy')
+    document.body.removeChild(t)
   } else {
-    navigator.clipboard.writeText(txt);
+    navigator.clipboard.writeText(txt)
   }
 
-  toast.success(`Copied: ${txt}`);
-};
+  toast.success(`Copied: ${txt}`)
+}
 
 export default function App() {
-  const [pixelsPerRem, setPixelsPerRem] = useState(16);
+  const [pixelsPerRem, setPixelsPerRem] = useState(16)
 
-  const [minWidthPx, setMinWidthPx] = useState(320);
-  const [maxWidthPx, setMaxWidthPx] = useState(768);
-  const [minFontSize, setMinFontSize] = useState(1);
-  const [maxFontSize, setMaxFontSize] = useState(3.5);
+  const [minWidthPx, setMinWidthPx] = useState(320)
+  const [maxWidthPx, setMaxWidthPx] = useState(768)
+  const [minFontSize, setMinFontSize] = useState(1)
+  const [maxFontSize, setMaxFontSize] = useState(3.5)
 
-  const minWidth = minWidthPx / pixelsPerRem;
-  const maxWidth = maxWidthPx / pixelsPerRem;
+  const minWidth = minWidthPx / pixelsPerRem
+  const maxWidth = maxWidthPx / pixelsPerRem
 
-  const slope = (maxFontSize - minFontSize) / (maxWidth - minWidth);
-  const yAxisIntersection = -minWidth * slope + minFontSize;
+  const slope = (maxFontSize - minFontSize) / (maxWidth - minWidth)
+  const yAxisIntersection = -minWidth * slope + minFontSize
 
   const clampFunc = `clamp(${minFontSize}rem, ${yAxisIntersection.toFixed(4)}rem + ${(slope * 100).toFixed(
     4
-  )}vw, ${maxFontSize}rem);`;
+  )}vw, ${maxFontSize}rem);`
 
   return (
     <AppDiv>
@@ -114,5 +113,5 @@ export default function App() {
         </ResultBox>
       </Container>
     </AppDiv>
-  );
+  )
 }

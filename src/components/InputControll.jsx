@@ -1,21 +1,19 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 export default function InputControll(props) {
-  const { label, info } = props;
+  const { label, info } = props
 
   return (
     <Flex>
-      <Label htmlFor={info.id}>
-        {label}
-        <Separator>=</Separator>
-      </Label>
+      <Label htmlFor={info.id}>{label}</Label>
+      <Separator>=</Separator>
 
       <InputContainer>
         <Input id={info.id} value={info.value} onChange={info.onChange} />
         <Unit>{info.unit}</Unit>
       </InputContainer>
     </Flex>
-  );
+  )
 }
 
 const Flex = styled.div`
@@ -24,15 +22,14 @@ const Flex = styled.div`
   }
 
   @media (min-width: 500px) {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
     align-items: center;
   }
-`;
+`
 
 const Label = styled.label`
   text-align: end;
-`;
+`
 
 const Separator = styled.span`
   padding: 0 0.2rem;
@@ -40,7 +37,7 @@ const Separator = styled.span`
   @media (min-width: 500px) {
     padding: 0 1rem;
   }
-`;
+`
 
 const InputContainer = styled.div`
   margin-top: 0.5rem;
@@ -48,7 +45,7 @@ const InputContainer = styled.div`
   @media (min-width: 500px) {
     margin-top: 0;
   }
-`;
+`
 
 const Input = styled.input.attrs({ type: 'number' })`
   width: 7rem;
@@ -61,8 +58,8 @@ const Input = styled.input.attrs({ type: 'number' })`
     box-shadow: 0 0 10px #aaaaaa;
     border: 1px solid #a1a1a1;
   }
-`;
+`
 
 const Unit = styled.span`
   padding: 0 1rem;
-`;
+`
